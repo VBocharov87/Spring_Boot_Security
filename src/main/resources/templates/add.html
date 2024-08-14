@@ -1,0 +1,81 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Employee Form</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<form th:action="@{/admin/saveUser}" th:object="${user}" method="post">-->
+
+<!--    <input type="hidden" th:field="*{id}"/>-->
+<!--    Name: <input type="text" th:field="*{username}"/>-->
+<!--    <br><br>-->
+<!--    Age: <input type="text" th:field="*{age}" th:value="${user.age == null ? '' : user.age}"/>-->
+<!--    <br><br>-->
+<!--    Email: <input type="text" th:field="*{email}"/>-->
+<!--    <br><br>-->
+<!--    <p>Roles:</p>-->
+<!--    <ul>-->
+<!--        <li th:each="role : ${roles}">-->
+<!--            <input type="checkbox" th:value="${role.id}" th:field="*{roles}" />-->
+<!--            <span th:text="${role.name}"></span>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--    <br><br>-->
+<!--    Password: <input type="text" th:field="*{password}"/>-->
+<!--    <br><br><br>-->
+
+<!--    <input type="submit" value="Confirm">-->
+<!--    <button type="button" th:onclick="|window.location.href='@{/logout}';|">Log out</button>-->
+
+<!--</form>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Form</title>
+</head>
+<body>
+
+<form th:action="@{/admin/saveUser}" th:object="${user}" method="post">
+
+    <input type="hidden" th:field="*{id}"/>
+    Name: <input type="text" th:field="*{username}"/>
+    <br><br>
+    Age: <input type="text" th:field="*{age}" th:value="${user.age == null ? '' : user.age}"/>
+    <br><br>
+    Email: <input type="text" th:field="*{email}"/>
+    <br><br>
+
+    <p>Roles:</p>
+    <ul>
+        <li th:each="role : ${roles}">
+            <input type="checkbox" th:value="${role.id}" th:field="*{roles}" />
+            <span th:text="${role.name}"></span>
+        </li>
+    </ul>
+
+    <!-- Отображаем ошибку, если она есть -->
+    <div th:if="${error}" style="color:red;">
+        <p th:text="${error}"></p>
+    </div>
+
+    <br><br>
+    Password: <input type="text" th:field="*{password}"/>
+    <br><br><br>
+    <button type="button" th:onclick="|window.location.href='@{/admin}';|">Back</button>
+    <button type="button" th:onclick="|window.location.href='@{/logout}';|">Log out</button>
+    <input type="submit" value="Confirm">
+
+
+</form>
+
+</body>
+</html>

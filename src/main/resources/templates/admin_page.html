@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All users list</title>
+</head>
+<body>
+<div>
+    <table border="2" width="700">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Password</th>
+            <th>Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.age}"></td>
+            <td th:text="${user.email}"></td>
+            <td>
+                <ul>
+                    <li th:each="role : ${user.roles}" th:text="${role.toString}"></li>
+                </ul>
+            </td>
+            <td th:text="${user.password}"></td>
+
+            <td style="text-align: center;">
+                <a th:href="@{/admin/update(id=${user.id})}" style="text-decoration: none; color: blue;">Update</a>
+                <form th:action="@{/admin/delete(id=${user.id})}" method="post" style="display:inline;">
+                    <button type="submit" style="background: none; border: none; color: red; cursor: pointer;">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br><br>
+    <button type="button" th:onclick="|window.location.href='@{/admin/add}';|">Add new User</button>
+    <button type="button" th:onclick="|window.location.href='@{/user}';|">View your own info</button>
+    <button type="button" th:onclick="|window.location.href='@{/logout}';|">Log out</button>
+</div>
+</body>
+</html>

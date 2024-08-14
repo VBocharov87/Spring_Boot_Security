@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>User Information</title>
+    <style>
+        .button-container {
+            display: flex;
+            gap: 10px; /* Расстояние между кнопками */
+        }
+    </style>
+</head>
+<body>
+<h1>User, welcome to the Spring Boot Security page!</h1>
+
+<h2>Your information:</h2>
+<p>ID: <span th:text="${user.id}"></span></p>
+<p>Username: <span th:text="${user.username}"></span></p>
+<p>Age: <span th:text="${user.age}"></span></p>
+<p>Email: <span th:text="${user.email}"></span></p>
+<p>Your roles:</p>
+<ul>
+    <li th:each="role : ${user.roles}" th:text="${role.toString()}"></li>
+</ul>
+<p>Password: <span th:text="${user.password}"></span></p>
+
+<div class="button-container">
+    <button type="button" th:onclick="|window.location.href='@{/admin}';|" sec:authorize="hasRole('ADMIN')">Back</button>
+    <button type="button" th:onclick="|window.location.href='@{/logout}';|">Log out</button>
+</div>
+
+</body>
+</html>
+
